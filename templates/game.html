@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ game.title }}</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: black; color: #00ff00; text-align: center; }
+        img { width: 600px; height: 300px; border: 3px solid #ff0000; border-radius: 5px; margin: 20px 0; }
+        a.download { display: inline-block; padding: 10px 25px; margin: 5px; background: #ff0000; color: #00ff00; font-weight: bold; text-decoration: none; border-radius: 3px; transition: 0.2s; }
+        a.download:hover { background: #00ff00; color: #ff0000; }
+        h1, h2 { text-shadow: 2px 2px #ff0000; }
+    </style>
+</head>
+<body>
+    <h1>{{ game.title }}</h1>
+    <img src="/static/banners/{{ game.banner }}" alt="{{ game.title }}">
+    <p>{{ game.description }}</p>
+    <h2>Download Links:</h2>
+    {% for idx, link in enumerate(game.downloads, start=1) %}
+        <a class="download" href="{{ link }}" target="_blank">Link {{ idx }}</a><br><br>
+    {% endfor %}
+</body>
+</html>

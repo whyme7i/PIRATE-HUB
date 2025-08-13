@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pirate Game Hub</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: black; color: #00ff00; text-align: center; }
+        .game { display: inline-block; margin: 20px; }
+        img { width: 300px; height: 150px; border: 3px solid #ff0000; border-radius: 5px; }
+        a { color: #00ff00; text-decoration: none; }
+        a:hover { color: #ff0000; }
+        h1 { text-shadow: 2px 2px #ff0000; }
+    </style>
+</head>
+<body>
+    <h1>Pirate Game Hub</h1>
+    {% for game in games %}
+        <div class="game">
+            <a href="/game/{{ game.id }}">
+                <img src="/static/banners/{{ game.banner }}" alt="{{ game.title }}">
+                <h3>{{ game.title }}</h3>
+            </a>
+        </div>
+    {% endfor %}
+</body>
+</html>
