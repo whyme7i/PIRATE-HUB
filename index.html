@@ -2,390 +2,495 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pirate Game Hub</title>
 <style>
-  body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 0; }
-  h1 { color: #ff0000; text-shadow: 2px 2px #00ff00; margin-top: 20px; }
-  .game { margin: 30px auto; padding: 20px; border: 2px solid #ff0000; width: 90%; max-width: 900px; background: rgba(0,0,0,0.85); border-radius: 10px; }
-  .game img { width: 100%; max-width: 800px; border: 3px solid #ff0000; border-radius: 8px; }
-  .download-btn { display: inline-block; padding: 10px 20px; margin: 10px 5px; background: #ff0000; color: #00ff00; font-weight: bold; text-decoration: none; border-radius: 5px; cursor: pointer; transition: 0.2s; }
-  .download-btn:hover { background: #00ff00; color: #ff0000; }
-  .links-container { display: none; margin-top: 10px; text-align: center; }
-  .links-container a { display: block; color: #00ff00; margin: 5px 0; text-decoration: none; }
-  .links-container a:hover { color: #ff0000; }
- .coursexwagon-promo {
-  background: #2e2b23;
-  border: 2px solid #5a3c1a;
-  border-radius: 12px;
-  padding: 40px 20px;
-  text-align: center;
-  margin: 40px auto;
-  max-width: 900px;
-  box-shadow: 0 0 15px #5a3c1a66 inset, 0 0 20px #80623244;
-}
+/* Reset & Base */
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #e0e0e0; line-height: 1.6;}
+a {text-decoration: none; color: inherit;}
+h1, h2 {margin-bottom: 10px;}
+.container {max-width: 1200px; margin: auto; padding: 20px;}
 
-.coursexwagon-promo h2 {
-  font-size: 2rem;
-  color: #806232;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+/* Header */
+header {text-align: center; padding: 40px 0; background: #1a1a1a; border-bottom: 2px solid #ff0000;}
+header h1 {color: #ff0000; text-shadow: 2px 2px #00ff00; font-size: 3rem;}
 
-.coursexwagon-promo p {
-  font-size: 1.1rem;
-  color: #5a3c1a;
-  margin-bottom: 24px;
-}
+/* Trending Slider */
+.trending {display: flex; overflow-x: auto; gap: 20px; padding: 20px 0;}
+.trending::-webkit-scrollbar {height: 8px;}
+.trending::-webkit-scrollbar-thumb {background: #ff0000; border-radius: 4px;}
+.trending .trend-game {flex: 0 0 auto; width: 300px; background: #1f1f1f; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px #ff0000;}
+.trending .trend-game img {width: 100%; display: block; transition: transform 0.3s;}
+.trending .trend-game img:hover {transform: scale(1.05);}
+.trending .trend-game h3 {padding: 10px; font-size: 1.2rem; color: #ff0000; text-align: center;}
 
-.coursexwagon-promo .promo-btn {
-  display: inline-block;
-  background: #5a3c1a;
-  color: #1a0a00;
-  font-weight: 900;
-  text-transform: uppercase;
-  font-size: 1.25rem;
-  padding: 14px 28px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #80623288, 0 0 6px #5a3c1a66 inset;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
+/* Game Cards */
+.games {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 0;}
+.game-card {background: #1f1f1f; border: 2px solid #ff0000; border-radius: 10px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;}
+.game-card:hover {transform: translateY(-5px); box-shadow: 0 0 20px #ff0000;}
+.game-card img {width: 100%; display: block;}
+.game-card-content {padding: 15px;}
+.game-card h2 {color: #ff0000; font-size: 1.5rem; margin-bottom: 5px; text-align: center;}
+.game-card p {text-align: center; font-size: 0.9rem; margin-bottom: 10px; color: #00ff00;}
+.download-btn {display: block; width: 80%; margin: 10px auto; padding: 10px 0; background: #ff0000; color: #00ff00; font-weight: bold; text-align: center; border-radius: 5px; transition: 0.2s;}
+.download-btn:hover {background: #00ff00; color: #ff0000;}
 
-.coursexwagon-promo .promo-btn:hover {
-  background: #806232;
-  color: #0a0a00;
-  box-shadow: 0 0 16px #806232aa, 0 0 8px #5a3c1a99 inset;
-  transform: translateY(-3px);
-}
+/* Links Container */
+.links-container {display: none; margin-top: 10px; text-align: center;}
+.links-container a {display: block; color: #00ff00; margin: 5px 0;}
+.links-container a:hover {color: #ff0000;}
+
+/* Footer Promo */
+.coursexwagon-promo {background: #2e2b23; border: 2px solid #5a3c1a; border-radius: 12px; padding: 40px 20px; text-align: center; margin: 40px auto; max-width: 900px; box-shadow: 0 0 15px #5a3c1a66 inset, 0 0 20px #80623244;}
+.coursexwagon-promo h2 {font-size: 2rem; color: #806232; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em;}
+.coursexwagon-promo p {font-size: 1.1rem; color: #5a3c1a; margin-bottom: 24px;}
+.coursexwagon-promo .promo-btn {display: inline-block; background: #5a3c1a; color: #1a0a00; font-weight: 900; text-transform: uppercase; font-size: 1.25rem; padding: 14px 28px; border-radius: 8px; box-shadow: 0 0 10px #80623288, 0 0 6px #5a3c1a66 inset; transition: all 0.3s ease;}
+.coursexwagon-promo .promo-btn:hover {background: #806232; color: #0a0a00; transform: translateY(-3px); box-shadow: 0 0 16px #806232aa, 0 0 8px #5a3c1a99 inset;}
 </style>
 </head>
-<body>
-<h1>Pirate Game Hub</h1>
-
-<!-- Game 1 -->
-<div class="game">
-  <h2>Cities Skylines II</h2>
-  <img src="static/banners/4.Cities-Skylines-II-660x371.jpg" alt="Cities Skylines II">
-  <p>Last update June 11, 2025 | Version 1.3.3f1</p>
-  <button class="download-btn" onclick="toggleLinks('game1')">Show Download Links</button>
-  <div class="links-container" id="game1">
-    <a href="https://store.steampowered.com/news/?appids=949230" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 2 -->
-<div class="game">
-  <h2>Clair Obscur: Expedition 33</h2>
-  <img src="static/banners/6.Clair-Obscur-Expedition-33-527x296.jpg" alt="Clair Obscur">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game2')">Show Download Links</button>
-  <div class="links-container" id="game2">
-    <a href="https://qiwi.gg/folder/685c64beac1f006fadcfeab3" target="_blank">Link 1</a>
-    <a href="https://pixeldrain.com/l/deXzUTvC" target="_blank">Link 2</a>
-    <a href="https://buzzheavier.com/68hb55c9vqnk" target="_blank">Link 3</a>
-  </div>
-</div>
-
-<!-- Game 3 -->
-<div class="game">
-  <h2>Call of Duty Vanguard</h2>
-  <img src="static/banners/3.Call-of-Duty-Vanguard-527x296.jpg" alt="Call of Duty Vanguard">
-  <p>Campaign Mode Only | Last update 25 May, 2025</p>
-  <button class="download-btn" onclick="toggleLinks('game3')">Show Download Links</button>
-  <div class="links-container" id="game3">
-    <a href="https://zeroupload.com/folder/3b47dae0f98027b6dfa2d3d7284d58ae/Call_of_Duty_Vanguard" target="_blank">Link 1</a>
-    <a href="https://buzzheavier.com/dr2v818dtg2n" target="_blank">Link 2</a>
-    <a href="https://qiwi.gg/folder/6856b90e5a205887c92d5fb2" target="_blank">Link 3</a>
-  </div>
-</div>
-
-<!-- Game 4 -->
-<div class="game">
-  <h2>Call of Duty Modern Warfare II</h2>
-  <img src="static/banners/2.Call-of-Duty-Modern-Warfare-II-2022-527x297.jpg" alt="Modern Warfare II">
-  <p>Campaign Mode Only | Last update 15 May, 2025</p>
-  <button class="download-btn" onclick="toggleLinks('game4')">Show Download Links</button>
-  <div class="links-container" id="game4">
-    <a href="https://zeroupload.com/folder/92b1ab8982eb86c4d426eb4463f10cb4/Call_of_Duty_Modern_Warfare_II" target="_blank">Link 1</a>
-    <a href="https://buzzheavier.com/8crk61d2z4nw" target="_blank">Link 2</a>
-    <a href="https://qiwi.gg/folder/6856b905ac1f006fadcfd790" target="_blank">Link 3</a>
-  </div>
-</div>
-
-<!-- Game 5 -->
-<div class="game">
-  <h2>Elden Ring Nightreign</h2>
-  <img src="static/banners/7.Elden-Ring-Nightreign-527x296.jpg" alt="Elden Ring Nightreign">
-  <p>Last update 11 June, 2025 | Version 1.01.2</p>
-  <button class="download-btn" onclick="toggleLinks('game5')">Show Download Links</button>
-  <div class="links-container" id="game5">
-    <a href="https://zeroupload.com/folder/2b4c39de40648b2e78ffc8656ea287e9/Elden_Ring_Nightreign" target="_blank">Link 1</a>
-    <a href="https://qiwi.gg/folder/6850559e78d1bba4672efb37" target="_blank">Link 2</a>
-  </div>
-</div>
-
-<!-- Game 6 -->
-<div class="game">
-  <h2>MindsEye</h2>
-  <img src="static/banners/19.MindsEye-527x296.jpg" alt="MindsEye">
-  <p>Last update 10 June, 2025</p>
-  <button class="download-btn" onclick="toggleLinks('game6')">Show Download Links</button>
-  <div class="links-container" id="game6">
-    <a href="https://zeroupload.com/folder/03529836dec114dcfeb0073a1da4df7b/MindsEye" target="_blank">Link 1</a>
-    <a href="https://qiwi.gg/folder/685048e0336c7a8f4a2b3f00" target="_blank">Link 2</a>
-  </div>
-</div>
-
-<!-- Game 7 -->
-<div class="game">
-  <h2>Lies of P</h2>
-  <img src="static/banners/14.Lies-of-P-527x296.jpg" alt="Lies of P">
-  <p>Last update 14 February, 2024</p>
-  <button class="download-btn" onclick="toggleLinks('game7')">Show Download Links</button>
-  <div class="links-container" id="game7">
-    <a href="https://zeroupload.com/folder/df20c2687164383fccb51a2fc11f0abc/Lies_of_P" target="_blank">Link 1</a>
-    <a href="https://qiwi.gg/folder/684c822a926b932d826eaa49" target="_blank">Link 2</a>
-  </div>
-</div>
-
-<!-- Game 8 -->
-<div class="game">
-  <h2>inZOI v0.2.0</h2>
-  <img src="static/banners/13.inZOI-527x296.jpg" alt="inZOI v0.2.0">
-  <p>Last update June 12, 2025 | Version 0.2.0</p>
-  <button class="download-btn" onclick="toggleLinks('game8')">Show Download Links</button>
-  <div class="links-container" id="game8">
-    <a href="https://zeroupload.com/folder/0af60a670ede89b1cda970a61760bfe2/inZoi_v0.2.0" target="_blank">Link 1</a>
-    <a href="https://qiwi.gg/folder/684c81fbd7605e839c07d35c" target="_blank">Link 2</a>
-  </div>
-</div>
-
-<!-- Game 9 -->
-<div class="game">
-  <h2>Empire of the Ants</h2>
-  <img src="static/banners/8.Empire-of-the-Ants-527x296.jpg" alt="Empire of the Ants">
-  <p>Last update March 15, 2025 | Version 1.03.20053</p>
-  <button class="download-btn" onclick="toggleLinks('game9')">Show Download Links</button>
-  <div class="links-container" id="game9">
-    <a href="https://zeroupload.com/folder/06bf6153d43d9ae261b03d3bcd257e26/Empire_of_the_Ants" target="_blank">Link 1</a>
-    <a href="https://qiwi.gg/folder/68276d20b679e53c30ef78a1
-    <a href="https://zeroupload.com/58ceaf1b1d3b7cd8b06156e380fd7ed8" target="_blank">Update 1</a>
-    <a href="https://qiwi.gg/file/hkFM1093-EmpireoftheAntsUpdatev1" target="_blank">Update 1</a>
-    <a href="https://zeroupload.com/4bfb26dc7cecd6dfb02e80824679e053" target="_blank">Update 2</a>
-    <a href="https://qiwi.gg/file/iRo69809-EmpireoftheAntsUpdate1" target="_blank">Update 2</a>
-  </div>
-</div>
-
-<!-- Game 10 -->
-<div class="game">
-  <h2>Split Fiction</h2>
-  <img src="static/banners/21.Split-Fiction-527x297.jpg" alt="Split Fiction">
-  <p>Last update March 6, 2025</p>
-  <button class="download-btn" onclick="toggleLinks('game10')">Show Download Links</button>
-  <div class="links-container" id="game10">
-    <a href="https://zeroupload.com/folder/3e0a91719e3f6c36b7e69d9538ea3cec/Split_Fiction" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 11 -->
-<div class="game">
-  <h2>Marvels Spider-Man 2 Digital Deluxe Edition v1.31</h2>
-  <img src="static/banners/17.Marvels-Spider-Man-2-527x296.jpg" alt="Marvels Spider-Man 2 Deluxe">
-  <p>Last update February 06, 2025 | Version 1.31</p>
-  <button class="download-btn" onclick="toggleLinks('game11')">Show Download Links</button>
-  <div class="links-container" id="game11">
-    <a href="https://zeroupload.com/folder/cdecc9df9518b284845ebbf8ccc4ca36/Marvels_Spider-Man_2_Digital_Deluxe_Edition_v1.31" target="_blank">Link 1</a>
-    <a href="https://uploadhive.com/f/9qomtx8apbacnxez1xihs79sdycr5ery" target="_blank">Link 2</a>
-  </div>
-</div>
-
-<!-- Game 12 -->
-<div class="game">
-  <h2>Manor Lords 0.7.954</h2>
-  <img src="static/banners/16.Manor-Lords-660x371.jpg" alt="Manor Lords">
-  <p>Last update April 26, 2024 | Version 0.7.954</p>
-  <button class="download-btn" onclick="toggleLinks('game12')">Show Download Links</button>
-  <div class="links-container" id="game12">
-    <a href="https://zeroupload.com/661e3b34dc532581a8b0bf4dcd8e33be" target="_blank">Link 1</a>
-    <a href="https://pixeldrain.com/u/7ZQN44ji" target="_blank">Link 2</a>
-    <a href="https://1cloudfile.com/c9wb" target="_blank">Link 3</a>
-    <a href="https://zeroupload.com/700c451b30d531f3488f2d0716a4273d" target="_blank">Extras 1</a>
-    <a href="https://pixeldrain.com/u/4LqpG6xw" target="_blank">Extras 2</a>
-    <a href="https://1cloudfile.com/c9wh" target="_blank">Extras 3</a>
-  </div>
-</div>
-
-<!-- Game 13 -->
-<div class="game">
-  <h2>Synthesia 10.9.5890</h2>
-  <img src="static/banners/23.synthe10.4_FI-768x384.jpg" alt="Synthesia 10.9.5890">
-  <p>Full Version Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game13')">Show Download Links</button>
-  <div class="links-container" id="game13">
-    <a href="https://zeroupload.com/48797271cbc7e174de06720cb3994a10" target="_blank">Link 1</a>
-    <a href="https://pixeldrain.com/u/AaZFJ7zV" target="_blank">Link 2</a>
-    <a href="https://1cloudfile.com/6vph" target="_blank">Link 3</a>
-    <a href="https://bowfile.com/mthO" target="_blank">Link 4</a>
-  </div>
-</div>
-
-<!-- Game 14 -->
-<div class="game">
-  <h2>Under The Waves</h2>
-  <img src="static/banners/25.Under-The-Waves-660x371.jpg" alt="Under The Waves">
-  <p>Last update August 29, 2023</p>
-  <button class="download-btn" onclick="toggleLinks('game14')">Show Download Links</button>
-  <div class="links-container" id="game14">
-    <a href="https://zeroupload.com/5dc16d75f9009410b6ba9ba15dfb3ae3" target="_blank">Link 1</a>
-    <a href="https://pixeldrain.com/u/As1UhUyB" target="_blank">Link 2</a>
-    <a href="https://uploadhub.to/tb75kdvyiiwi" target="_blank">Link 3</a>
-    <a href="https://1cloudfile.com/alsJ" target="_blank">Link 4</a>
-    <a href="https://bowfile.com/dVXb" target="_blank">Link 5</a>
-  </div>
-</div>
-
-<!-- Game 15 -->
-<div class="game">
-  <h2>Stray v1.4.227</h2>
-  <img src="static/banners/22.Stray-660x371.jpg" alt="Stray">
-  <p>Last update August, 2022</p>
-  <button class="download-btn" onclick="toggleLinks('game15')">Show Download Links</button>
-  <div class="links-container" id="game15">
-    <a href="https://zeroupload.com/5e18fa5e1c927cc02940905e5685e8ac" target="_blank">Link 1</a>
-    <a href="https://bowfile.com/hvdV" target="_blank">Link 2</a>
-    <a href="https://1cloudfile.com/8ZiY" target="_blank">Link 3</a>
-  </div>
-</div>
-
-<!-- Game 16 -->
-<div class="game">
-  <h2>Forza Horizon 5 – EMPRESS</h2>
-  <img src="static/banners/9.Forza-Horizon-5-660x371.jpg" alt="Forza Horizon 5">
-  <p>Last update November, 2021 | 92.28GB</p>
-  <button class="download-btn" onclick="toggleLinks('game16')">Show Download Links</button>
-  <div class="links-container" id="game16">
-    <a href="https://uploadhub.to/03b60335680a3ca4" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 17 -->
-<div class="game">
-  <h2>GameMaker Studio Ultimate v2.3.2.560</h2>
-  <img src="static/banners/10.GameMaker-Studio-Ultimate-660x371.jpg" alt="GameMaker Studio Ultimate">
-  <p>Full Version Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game17')">Show Download Links</button>
-  <div class="links-container" id="game17">
-    <a href="https://www56.zippyshare.com/v/EUkVfCw5/file.html" target="_blank">Link 1</a>
-    <a href="https://uploadhub.to/bb6aa993511859e3519e756b7ec4572c" target="_blank">Link 2</a>
-    <a href="https://sama-share.com/t7sxoam6yyg8" target="_blank">Link 3</a>
-  </div>
-</div>
-
-<!-- Game 18 -->
-<div class="game">
-  <h2>Bionic Bay</h2>
-  <img src="static/banners/1.Bionic-Bay-527x297.jpg" alt="Bionic Bay">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game18')">Show Download Links</button>
-  <div class="links-container" id="game18">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 19 -->
-<div class="game">
-  <h2>PINS</h2>
-  <img src="static/banners/20.PINS_FI.jpg" alt="PINS">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game19')">Show Download Links</button>
-  <div class="links-container" id="game19">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 20 -->
-<div class="game">
-  <h2>The Alters</h2>
-  <img src="static/banners/24.The-Alters-527x296.jpg" alt="The Alters">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game20')">Show Download Links</button>
-  <div class="links-container" id="game20">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 21 -->
-<div class="game">
-  <h2>MDK2</h2>
-  <img src="static/banners/18.MDK2_FI.png" alt="MDK2">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game21')">Show Download Links</button>
-  <div class="links-container" id="game21">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 22 -->
-<div class="game">
-  <h2>Manor Lords</h2>
-  <img src="static/banners/16.Manor-Lords-660x371.jpg" alt="Manor Lords">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game22')">Show Download Links</button>
-  <div class="links-container" id="game22">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 23 -->
-<div class="game">
-  <h2>Synthe 10.4</h2>
-  <img src="static/banners/23.synthe10.4_FI-768x384.jpg" alt="Synthe 10.4">
-  <p>Full Version Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game23')">Show Download Links</button>
-  <div class="links-container" id="game23">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 24 -->
-<div class="game">
-  <h2>Stray</h2>
-  <img src="static/banners/22.Stray-660x371.jpg" alt="Stray">
-  <p>Full Version Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game24')">Show Download Links</button>
-  <div class="links-container" id="game24">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-
-<!-- Game 25 -->
-<div class="game">
-  <h2>vcop2</h2>
-  <img src="static/banners/26.vcop2_FI-768x307.jpg" alt="vcop2">
-  <p>PC Game Free Download</p>
-  <button class="download-btn" onclick="toggleLinks('game25')">Show Download Links</button>
-  <div class="links-container" id="game25">
-    <a href="#" target="_blank">Link 1</a>
-  </div>
-</div>
-<!-- COURSE.XWAGON Promotion Section -->
-<section class="coursexwagon-promo" aria-label="Go to Coursexwagon">
-  <div class="promo-text">
-    <h2>Discover Courses, Audiobooks & Guru Lessons</h2>
-    <p>Unlock all premium content and dive into mastery. Visit COURSE.XWAGON now!</p>
-  </div>
-  <a href="https://coursexwagon.dedyn.io" class="promo-btn" target="_blank" rel="noopener noreferrer">Go to COURSE.XWAGON</a>
+<!-- Library Promo Section -->
+<section id="library-promo" style="background:#111; padding:60px 20px; text-align:center; border-top:3px solid #ff0000;">
+  <h2 style="color:#ff0000; font-size:2.5rem; text-shadow:2px 2px #00ff00; margin-bottom:20px;">
+    Audiobooks, Books & Courses
+  </h2>
+  <p style="color:#00ff00; font-size:1.2rem; max-width:700px; margin:0 auto 30px auto;">
+    Explore top-quality audiobooks, books, and courses all in one place. Never pay over $50—get instant access to premium content at COURSE.XWAGON!
+  </p>
+  <a href="https://coursexwagon.dedyn.io" target="_blank" 
+     style="display:inline-block; padding:18px 40px; font-size:1.25rem; font-weight:bold; color:#00ff00; background:#ff0000; border-radius:10px; text-decoration:none; box-shadow:0 0 15px #ff000066, 0 0 8px #00ff0066; transition:all 0.3s ease;">
+    Go to COURSE.XWAGON
+  </a>
 </section>
+<body>
+<header>
+    <h1>Pirate Game Hub</h1>
+</header>
+
+<!-- Trending Games -->
+<section class="trending">
+    <div class="trend-game">
+        <img src="static/banners/4.Cities-Skylines-II-660x371.jpg" alt="Cities Skylines II">
+        <h3>Cities Skylines II</h3>
+    </div>
+    <div class="trend-game">
+        <img src="static/banners/6.Clair-Obscur-Expedition-33-527x296.jpg" alt="Clair Obscur">
+        <h3>Clair Obscur: Expedition 33</h3>
+    </div>
+    <div class="trend-game">
+        <img src="static/banners/3.Call-of-Duty-Vanguard-527x296.jpg" alt="Call of Duty Vanguard">
+        <h3>Call of Duty Vanguard</h3>
+    </div>
+</section>
+
+<!-- All Games -->
+<section class="games">
+  <!-- Example Game Card -->
+  <div class="game-card">
+    <img src="static/banners/4.Cities-Skylines-II-660x371.jpg" alt="Cities Skylines II">
+    <div class="game-card-content">
+      <h2>Cities Skylines II</h2>
+      <p>Last update June 11, 2025 | Version 1.3.3f1</p>
+      <button class="download-btn" onclick="toggleLinks('game1')">Show Download Links</button>
+      <div class="links-container" id="game1">
+        <a href="https://store.steampowered.com/news/?appids=949230" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/6.Clair-Obscur-Expedition-33-527x296.jpg" alt="Clair Obscur">
+    <div class="game-card-content">
+      <h2>Clair Obscur: Expedition 33</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game2')">Show Download Links</button>
+      <div class="links-container" id="game2">
+        <a href="https://qiwi.gg/folder/685c64beac1f006fadcfeab3" target="_blank">Link 1</a>
+        <a href="https://pixeldrain.com/l/deXzUTvC" target="_blank">Link 2</a>
+        <a href="https://buzzheavier.com/68hb55c9vqnk" target="_blank">Link 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/3.Call-of-Duty-Vanguard-527x296.jpg" alt="Call of Duty Vanguard">
+    <div class="game-card-content">
+      <h2>Call of Duty Vanguard</h2>
+      <p>Campaign Mode Only | Last update 25 May, 2025</p>
+      <button class="download-btn" onclick="toggleLinks('game3')">Show Download Links</button>
+      <div class="links-container" id="game3">
+        <a href="https://zeroupload.com/folder/3b47dae0f98027b6dfa2d3d7284d58ae/Call_of_Duty_Vanguard" target="_blank">Link 1</a>
+        <a href="https://buzzheavier.com/dr2v818dtg2n" target="_blank">Link 2</a>
+        <a href="https://qiwi.gg/folder/6856b90e5a205887c92d5fb2" target="_blank">Link 3</a>
+      </div>
+    </div>
+  <div class="game-card">
+    <img src="static/banners/2.Call-of-Duty-Modern-Warfare-II-2022-527x297.jpg" alt="Modern Warfare II">
+    <div class="game-card-content">
+      <h2>Call of Duty Modern Warfare II</h2>
+      <p>Campaign Mode Only | Last update 15 May, 2025</p>
+      <button class="download-btn" onclick="toggleLinks('game4')">Show Download Links</button>
+      <div class="links-container" id="game4">
+        <a href="https://zeroupload.com/folder/92b1ab8982eb86c4d426eb4463f10cb4/Call_of_Duty_Modern_Warfare_II" target="_blank">Link 1</a>
+        <a href="https://buzzheavier.com/8crk61d2z4nw" target="_blank">Link 2</a>
+        <a href="https://qiwi.gg/folder/6856b905ac1f006fadcfd790" target="_blank">Link 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/7.Elden-Ring-Nightreign-527x296.jpg" alt="Elden Ring Nightreign">
+    <div class="game-card-content">
+      <h2>Elden Ring Nightreign</h2>
+      <p>Last update 11 June, 2025 | Version 1.01.2</p>
+      <button class="download-btn" onclick="toggleLinks('game5')">Show Download Links</button>
+      <div class="links-container" id="game5">
+        <a href="https://zeroupload.com/folder/2b4c39de40648b2e78ffc8656ea287e9/Elden_Ring_Nightreign" target="_blank">Link 1</a>
+        <a href="https://qiwi.gg/folder/6850559e78d1bba4672efb37" target="_blank">Link 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/19.MindsEye-527x296.jpg" alt="MindsEye">
+    <div class="game-card-content">
+      <h2>MindsEye</h2>
+      <p>Last update 10 June, 2025</p>
+      <button class="download-btn" onclick="toggleLinks('game6')">Show Download Links</button>
+      <div class="links-container" id="game6">
+        <a href="https://zeroupload.com/folder/03529836dec114dcfeb0073a1da4df7b/MindsEye" target="_blank">Link 1</a>
+        <a href="https://qiwi.gg/folder/685048e0336c7a8f4a2b3f00" target="_blank">Link 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/14.Lies-of-P-527x296.jpg" alt="Lies of P">
+    <div class="game-card-content">
+      <h2>Lies of P</h2>
+      <p>Last update 14 February, 2024</p>
+      <button class="download-btn" onclick="toggleLinks('game7')">Show Download Links</button>
+      <div class="links-container" id="game7">
+        <a href="https://zeroupload.com/folder/df20c2687164383fccb51a2fc11f0abc/Lies_of_P" target="_blank">Link 1</a>
+        <a href="https://qiwi.gg/folder/684c822a926b932d826eaa49" target="_blank">Link 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/13.inZOI-527x296.jpg" alt="inZOI v0.2.0">
+    <div class="game-card-content">
+      <h2>inZOI v0.2.0</h2>
+      <p>Last update June 12, 2025 | Version 0.2.0</p>
+      <button class="download-btn" onclick="toggleLinks('game8')">Show Download Links</button>
+      <div class="links-container" id="game8">
+        <a href="https://zeroupload.com/folder/0af60a670ede89b1cda970a61760bfe2/inZoi_v0.2.0" target="_blank">Link 1</a>
+        <a href="https://qiwi.gg/folder/684c81fbd7605e839c07d35c" target="_blank">Link 2</a>
+      </div>
+    </div>
+  <div class="game-card">
+    <img src="static/banners/8.Empire-of-the-Ants-527x296.jpg" alt="Empire of the Ants">
+    <div class="game-card-content">
+      <h2>Empire of the Ants</h2>
+      <p>Last update March 15, 2025 | Version 1.03.20053</p>
+      <button class="download-btn" onclick="toggleLinks('game9')">Show Download Links</button>
+      <div class="links-container" id="game9">
+        <a href="https://zeroupload.com/folder/06bf6153d43d9ae261b03d3bcd257e26/Empire_of_the_Ants" target="_blank">Link 1</a>
+        <a href="https://qiwi.gg/file/hkFM1093-EmpireoftheAntsUpdatev1" target="_blank">Update 1</a>
+        <a href="https://zeroupload.com/4bfb26dc7cecd6dfb02e80824679e053" target="_blank">Update 2</a>
+        <a href="https://qiwi.gg/file/iRo69809-EmpireoftheAntsUpdate1" target="_blank">Update 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/21.Split-Fiction-527x297.jpg" alt="Split Fiction">
+    <div class="game-card-content">
+      <h2>Split Fiction</h2>
+      <p>Last update March 6, 2025</p>
+      <button class="download-btn" onclick="toggleLinks('game10')">Show Download Links</button>
+      <div class="links-container" id="game10">
+        <a href="https://zeroupload.com/folder/3e0a91719e3f6c36b7e69d9538ea3cec/Split_Fiction" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/17.Marvels-Spider-Man-2-527x296.jpg" alt="Marvels Spider-Man 2 Deluxe">
+    <div class="game-card-content">
+      <h2>Marvels Spider-Man 2 Digital Deluxe Edition v1.31</h2>
+      <p>Last update February 06, 2025 | Version 1.31</p>
+      <button class="download-btn" onclick="toggleLinks('game11')">Show Download Links</button>
+      <div class="links-container" id="game11">
+        <a href="https://zeroupload.com/folder/cdecc9df9518b284845ebbf8ccc4ca36/Marvels_Spider-Man_2_Digital_Deluxe_Edition_v1.31" target="_blank">Link 1</a>
+        <a href="https://uploadhive.com/f/9qomtx8apbacnxez1xihs79sdycr5ery" target="_blank">Link 2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/16.Manor-Lords-660x371.jpg" alt="Manor Lords">
+    <div class="game-card-content">
+      <h2>Manor Lords 0.7.954</h2>
+      <p>Last update April 26, 2024 | Version 0.7.954</p>
+      <button class="download-btn" onclick="toggleLinks('game12')">Show Download Links</button>
+      <div class="links-container" id="game12">
+        <a href="https://zeroupload.com/661e3b34dc532581a8b0bf4dcd8e33be" target="_blank">Link 1</a>
+        <a href="https://pixeldrain.com/u/7ZQN44ji" target="_blank">Link 2</a>
+        <a href="https://1cloudfile.com/c9wb" target="_blank">Link 3</a>
+        <a href="https://zeroupload.com/700c451b30d531f3488f2d0716a4273d" target="_blank">Extras 1</a>
+        <a href="https://pixeldrain.com/u/4LqpG6xw" target="_blank">Extras 2</a>
+        <a href="https://1cloudfile.com/c9wh" target="_blank">Extras 3</a>
+      </div>
+    </div>
+  <div class="game-card">
+    <img src="static/banners/23.synthe10.4_FI-768x384.jpg" alt="Synthesia 10.9.5890">
+    <div class="game-card-content">
+      <h2>Synthesia 10.9.5890</h2>
+      <p>Full Version Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game13')">Show Download Links</button>
+      <div class="links-container" id="game13">
+        <a href="https://zeroupload.com/48797271cbc7e174de06720cb3994a10" target="_blank">Link 1</a>
+        <a href="https://pixeldrain.com/u/AaZFJ7zV" target="_blank">Link 2</a>
+        <a href="https://1cloudfile.com/6vph" target="_blank">Link 3</a>
+        <a href="https://bowfile.com/mthO" target="_blank">Link 4</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/25.Under-The-Waves-660x371.jpg" alt="Under The Waves">
+    <div class="game-card-content">
+      <h2>Under The Waves</h2>
+      <p>Last update August 29, 2023</p>
+      <button class="download-btn" onclick="toggleLinks('game14')">Show Download Links</button>
+      <div class="links-container" id="game14">
+        <a href="https://zeroupload.com/5dc16d75f9009410b6ba9ba15dfb3ae3" target="_blank">Link 1</a>
+        <a href="https://pixeldrain.com/u/As1UhUyB" target="_blank">Link 2</a>
+        <a href="https://uploadhub.to/tb75kdvyiiwi" target="_blank">Link 3</a>
+        <a href="https://1cloudfile.com/alsJ" target="_blank">Link 4</a>
+        <a href="https://bowfile.com/dVXb" target="_blank">Link 5</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/22.Stray-660x371.jpg" alt="Stray v1.4.227">
+    <div class="game-card-content">
+      <h2>Stray v1.4.227</h2>
+      <p>Last update August, 2022</p>
+      <button class="download-btn" onclick="toggleLinks('game15')">Show Download Links</button>
+      <div class="links-container" id="game15">
+        <a href="https://zeroupload.com/5e18fa5e1c927cc02940905e5685e8ac" target="_blank">Link 1</a>
+        <a href="https://bowfile.com/hvdV" target="_blank">Link 2</a>
+        <a href="https://1cloudfile.com/8ZiY" target="_blank">Link 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/9.Forza-Horizon-5-660x371.jpg" alt="Forza Horizon 5 – EMPRESS">
+    <div class="game-card-content">
+      <h2>Forza Horizon 5 – EMPRESS</h2>
+      <p>Last update November, 2021 | 92.28GB</p>
+      <button class="download-btn" onclick="toggleLinks('game16')">Show Download Links</button>
+      <div class="links-container" id="game16">
+        <a href="https://uploadhub.to/03b60335680a3ca4" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/10.GameMaker-Studio-Ultimate-660x371.jpg" alt="GameMaker Studio Ultimate">
+    <div class="game-card-content">
+      <h2>GameMaker Studio Ultimate v2.3.2.560</h2>
+      <p>Full Version Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game17')">Show Download Links</button>
+      <div class="links-container" id="game17">
+        <a href="https://www56.zippyshare.com/v/EUkVfCw5/file.html" target="_blank">Link 1</a>
+        <a href="https://uploadhub.to/bb6aa993511859e3519e756b7ec4572c" target="_blank">Link 2</a>
+        <a href="https://sama-share.com/t7sxoam6yyg8" target="_blank">Link 3</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/1.Bionic-Bay-527x297.jpg" alt="Bionic Bay">
+    <div class="game-card-content">
+      <h2>Bionic Bay</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game18')">Show Download Links</button>
+      <div class="links-container" id="game18">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  <div class="game-card">
+    <img src="static/banners/20.PINS_FI.jpg" alt="PINS">
+    <div class="game-card-content">
+      <h2>PINS</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game19')">Show Download Links</button>
+      <div class="links-container" id="game19">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/24.The-Alters-527x296.jpg" alt="The Alters">
+    <div class="game-card-content">
+      <h2>The Alters</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game20')">Show Download Links</button>
+      <div class="links-container" id="game20">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/18.MDK2_FI.png" alt="MDK2">
+    <div class="game-card-content">
+      <h2>MDK2</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game21')">Show Download Links</button>
+      <div class="links-container" id="game21">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/16.Manor-Lords-660x371.jpg" alt="Manor Lords">
+    <div class="game-card-content">
+      <h2>Manor Lords</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game22')">Show Download Links</button>
+      <div class="links-container" id="game22">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/23.synthe10.4_FI-768x384.jpg" alt="Synthe 10.4">
+    <div class="game-card-content">
+      <h2>Synthe 10.4</h2>
+      <p>Full Version Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game23')">Show Download Links</button>
+      <div class="links-container" id="game23">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/22.Stray-660x371.jpg" alt="Stray">
+    <div class="game-card-content">
+      <h2>Stray</h2>
+      <p>Full Version Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game24')">Show Download Links</button>
+      <div class="links-container" id="game24">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <img src="static/banners/26.vcop2_FI-768x307.jpg" alt="vcop2">
+    <div class="game-card-content">
+      <h2>vcop2</h2>
+      <p>PC Game Free Download</p>
+      <button class="download-btn" onclick="toggleLinks('game25')">Show Download Links</button>
+      <div class="links-container" id="game25">
+        <a href="#" target="_blank">Link 1</a>
+      </div>
+    </div>
+  <!-- Trending Games Slider -->
+<section class="trending-slider">
+  <h2>🔥 Trending Games</h2>
+  <div class="slider-container">
+    <div class="slide"><img src="static/banners/4.Cities-Skylines-II-660x371.jpg" alt="Cities Skylines II"></div>
+    <div class="slide"><img src="static/banners/3.Call-of-Duty-Vanguard-527x296.jpg" alt="Call of Duty Vanguard"></div>
+    <div class="slide"><img src="static/banners/7.Elden-Ring-Nightreign-527x296.jpg" alt="Elden Ring Nightreign"></div>
+  </div>
+</section>
+
+<style>
+/* Trending Slider */
+.trending-slider {
+  max-width: 1200px;
+  margin: 40px auto;
+  text-align: center;
+}
+.trending-slider h2 {
+  font-size: 2rem;
+  color: #ff0000;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px #00ff00;
+}
+.slider-container {
+  display: flex;
+  overflow: hidden;
+  border-radius: 12px;
+  gap: 20px;
+}
+.slide {
+  flex: 0 0 33.333%;
+  transition: transform 0.5s ease;
+}
+.slide img {
+  width: 100%;
+  border: 3px solid #ff0000;
+  border-radius: 10px;
+}
+</style>
+
 <script>
-  function toggleLinks(gameId) {
-    const container = document.getElementById(gameId);
-    if(container.style.display === "block") {
-      container.style.display = "none";
-    } else {
-      container.style.display = "block";
-    }
-  }
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlides() {
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+  });
+  slideIndex++;
+  if(slideIndex >= slides.length) slideIndex = 0;
+}
+
+setInterval(showSlides, 3000);
+
+/* Toggle Download Links */
+function toggleLinks(gameId) {
+  const container = document.getElementById(gameId);
+  container.style.display = container.style.display === "block" ? "none" : "block";
+}
 </script>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p>&copy; 2025 Pirate Game Hub. All rights reserved.</p>
+  <p>Follow us on <a href="#">Twitter</a> | <a href="#">Discord</a> | <a href="#">Reddit</a></p>
+</footer>
+
+<style>
+.site-footer {
+  background: #111;
+  color: #00ff00;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+.site-footer a {
+  color: #ff0000;
+  text-decoration: none;
+  margin: 0 10px;
+}
+.site-footer a:hover {
+  color: #00ff00;
+}
+<style>
+
 </body>
-</html>
+<html>
